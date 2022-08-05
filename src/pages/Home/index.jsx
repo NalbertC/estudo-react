@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './style.css'
 
@@ -7,6 +7,7 @@ import { Card } from '../../components/Card'
 export function Home() {
   const [studentName, setStudentName] = useState() //estado [valor, funcao que atualiza o estado]
   const [students, setStudensts] = useState([])
+  const [user, setUser] = useState({name: '', avatar: ''})
 
   function handleAddStudent() {
     const newStudent = {
@@ -21,9 +22,28 @@ export function Home() {
     setStudensts(prevState => [...prevState, newStudent])
   }
 
+  useEffect(() => {
+    //corpo do useEffect
+    fetch("https://api.github.com/users/NalbertC")
+      .then(response => response.json())
+      .then(data => {
+      setUser({
+        name: data.name,
+        avatar: data.avatar_url
+      })
+      })
+      .catch(error => console.error(error))
+  }, [])
+
   return (
     <div className='container'>
-      <h1>Lista de presença</h1>
+      <header>
+        <h1>Lista de presença</h1>
+        <div>
+          <strong>{user.name} </strong>
+          <img src={user.avatar} alt="Foto de perfil" />
+        </div>
+      </header>
       <input
         type="text"
         placeholder="Digite o nome ..."
@@ -34,7 +54,13 @@ export function Home() {
       </button>
 
       {
-        students.map(student => <Card name={student.name} time={student.time} />)
+        students.map(student => (
+          <Card
+            key={student.time}
+            name={student.name}
+            time={student.time}
+          />
+        ))
       }
     </div>
   )
