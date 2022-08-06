@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect} from 'react'
 
 import './style.css'
 
@@ -7,7 +7,7 @@ import { Card } from '../../components/Card'
 export function Home() {
   const [studentName, setStudentName] = useState() //estado [valor, funcao que atualiza o estado]
   const [students, setStudensts] = useState([])
-  const [user, setUser] = useState({name: '', avatar: ''})
+  const [user, setUser] = useState({ name: '', avatar: '' })
 
   function handleAddStudent() {
     const newStudent = {
@@ -24,15 +24,16 @@ export function Home() {
 
   useEffect(() => {
     //corpo do useEffect
-    fetch("https://api.github.com/users/NalbertC")
-      .then(response => response.json())
-      .then(data => {
+    async function fetchData() {
+      const response = await fetch("https://api.github.com/users/NalbertC")
+      const data = await response.json()
       setUser({
         name: data.name,
         avatar: data.avatar_url
       })
-      })
-      .catch(error => console.error(error))
+    }
+
+    fetchData()
   }, [])
 
   return (
@@ -65,4 +66,3 @@ export function Home() {
     </div>
   )
 }
-
