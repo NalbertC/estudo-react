@@ -13,7 +13,6 @@ Após rodar o comando acima, será exibido a tela para escolher o framework que 
 
 <img src="https://storage.googleapis.com/golden-wind/discover/especializar/reactjs/criando-o-projeto-1.png">
 
-_obs: Digitar 3 para escolher o react_
 
 Em seguida, será questionado sobre a variant, escolheremos react que representa que não usaremos o TypeScript nesse projeto.
 
