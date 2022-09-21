@@ -24,7 +24,7 @@ Após a criação será necessário baixar as dependências necessárias para a 
 
 Certifique-se que está na pasta do projeto e execute o comando desejado:
 
-``yarn install``
+``yarn``
 
 ``npm install``
 
